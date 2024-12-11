@@ -93,6 +93,7 @@ string Colony::GetNameByResource(const Resources& _resource) const
 		return "Nourriture";
 		break;
 	default:
+		return "Nothing";
 		break;
 	}
 }

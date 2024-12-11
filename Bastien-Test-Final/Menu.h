@@ -2,19 +2,21 @@
 #include "Macro.h"
 #include <vector>
 #include <conio.h>
+#include <functional>
 class Menu
 {
-	vector<pair<string, void(*)()>> options;
+	vector<pair<string, function<void()>>> options;
+	int currentIndex;
 
 #pragma region Constructor
 public:
-	Menu() = default;
-	Menu(vector<pair<string, void(*)()>> _options);
+	Menu();
 #pragma endregion
 
 #pragma region Functions
 	void Choice();
-	virtual void Display();
+	void Display();
+	void AddOption(const string& _name, function<void()> _action);
 #pragma endregion
 };
 

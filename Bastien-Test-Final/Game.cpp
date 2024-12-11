@@ -1,5 +1,4 @@
 #include "Game.h"
-#include "Colony.h"
 
 
 void Game::GameLoop()

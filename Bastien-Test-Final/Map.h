@@ -2,8 +2,6 @@
 #include "Macro.h"
 #include <vector>
 #include "Random.h"
-#include "Position.h"
-#include "TileType.h"
 #include "Colony.h"
 #include "Menu.h"
 

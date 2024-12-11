@@ -85,6 +85,8 @@ void Map::Move()
 	static const Position _directionTab[] = { Position(-1,0),Position(1,0),Position(0,-1), Position(0,1)};
 	Position _direction;
 	u_int _key = _getch();
+	Menu _menu;
+	_menu.AddOption("feur", [&]() {cout << "ratio" << endl;});
 	switch (_key)
 	{
 	case 72:
@@ -100,7 +102,8 @@ void Map::Move()
 		_direction = _directionTab[3];
 		break;
 	case 32:
-		
+		_menu.Choice();
+		break;
 	default:
 		_direction = Position(0, 0);
 		break;

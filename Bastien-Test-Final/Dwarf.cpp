@@ -1,9 +1,10 @@
 #include "Dwarf.h"
 
-Dwarf::Dwarf(Job _job, u_int _satiaty)
+Dwarf::Dwarf(const Job& _job, const u_int& _satiaty, const Position& _current)
 {
 	job = _job;
 	satiaty = _satiaty;
+	posDwarf = _current;
 }
 
 bool Dwarf::Task(const TileType& _tile)
@@ -43,8 +44,11 @@ void Dwarf::Move()
 
 void Dwarf::FindPath(const Position& _goal, const vector<vector<TileType>>& _map)
 {
-	AStar<TileType> _aStar(_map, posDwarf, _goal);
-	movement = _aStar.AStarFunction();
+	if(movement.empty())
+	{
+		AStar<TileType> _aStar(_map, posDwarf, _goal);
+		movement = _aStar.AStarFunction();
+	}
 }
 
 void Dwarf::Feed(const u_int& _quantityFood)

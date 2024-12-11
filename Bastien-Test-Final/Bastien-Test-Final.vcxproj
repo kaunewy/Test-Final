@@ -139,9 +139,12 @@
     <ClCompile Include="Colony.cpp" />
     <ClCompile Include="Dwarf.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Giant.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Orca.cpp" />
     <ClCompile Include="Tool.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -150,9 +153,12 @@
     <ClInclude Include="Color.h" />
     <ClInclude Include="Dwarf.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="Giant.h" />
     <ClInclude Include="Macro.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="Orca.h" />
     <ClInclude Include="Position.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="TileType.h" />

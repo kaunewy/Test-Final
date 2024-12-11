@@ -4,6 +4,8 @@
 #include "Random.h"
 #include "Position.h"
 #include "TileType.h"
+#include "Colony.h"
+#include "Menu.h"
 
 class Map
 {
@@ -11,6 +13,9 @@ class Map
 	Position cursorPlayer;
 	u_int width;
 	u_int length;
+	Colony* colony;
+	vector<Menu> menu;
+	Menu _currentMenu;
 
 #pragma region Getters
 public:
@@ -22,12 +27,20 @@ public:
 	{
 		return cursorPlayer;
 	}
+	inline u_int GetWidth() const
+	{
+		return width;
+	}
+	inline u_int GetLength() const
+	{
+		return length;
+	}
 #pragma endregion
 
 #pragma region Constructor
 public:
 	Map() = default;
-	Map(cu_int& _width, cu_int& _length);
+	Map(cu_int& _width, cu_int& _length, Colony& _colony);
 #pragma endregion
 
 #pragma region Function

@@ -1,5 +1,4 @@
-#include "Map.h"
-#include "AStar.h"
+#include "Game.h"
 
 
 int main()
@@ -9,17 +8,10 @@ int main()
 
 	SetConsoleOutputCP(65001);
 
-	Map _map(40, 60);
+	Game _game;
 
-	_map.Init();
-	while (true)
-	{
-	_map.Display();
-	_map.Move();
-	system("cls");
-	}
+	_game.GameLoop();
 
-	vector<Position> movement;
 
 	return 0;
 }

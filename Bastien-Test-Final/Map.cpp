@@ -1,11 +1,14 @@
 #include "Map.h"
 
-Map::Map(cu_int& _width, cu_int& _length)
+Map::Map(cu_int& _width, cu_int& _length, Colony& _colony)
 {
 	width = _width;
 	length = _length;
+	colony = &_colony;
 	cursorPlayer = Position(length/2,width/2);
 }
+
+
 
 void Map::Init()
 {
@@ -40,6 +43,15 @@ void Map::Display()
 			{
 				_addRGB = 50;
 			}
+			for (auto _dwarf : colony->GetDwarfs())
+			{
+				if (_dwarf.second->GetPos().x == _i && _dwarf.second->GetPos().y == _j)
+				{
+					cout << BG_RGB(140 + _addRGB, 52, 52) << " " << COLORRESET;
+				}
+			}
+
+			//Maison à faire en mieux
 			if (_i == length / 2 && _j == width / 2)
 			{
 				cout << BG_RGB(150 + _addRGB, 0, 0) << " " << COLORRESET;
@@ -87,6 +99,8 @@ void Map::Move()
 	case 77:
 		_direction = _directionTab[3];
 		break;
+	case 32:
+		
 	default:
 		_direction = Position(0, 0);
 		break;

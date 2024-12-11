@@ -52,12 +52,12 @@ public:
 
 #pragma region Construtor
 public:
-	Dwarf(Job _job = J_VILLAGER, u_int _satiaty = 100);
+	Dwarf(const Job& _job = J_VILLAGER, const u_int& _satiaty = 100, const Position& _current = Position(20, 20));
 #pragma endregion
 
 #pragma region Functions
 	bool Task(const TileType& _tile);
-	void Move();
+	void Move(); 
 	void FindPath(const Position& _goal, const vector<vector<TileType>>& _map);
 	void Feed(const u_int& _quantityFood);
 	void AddTool(Tool _tool);

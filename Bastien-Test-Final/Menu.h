@@ -8,15 +8,13 @@ class Menu
 
 #pragma region Constructor
 public:
-	Menu(vector<pair<string, void(*)()>> _options)
-	{
-
-	}
+	Menu() = default;
+	Menu(vector<pair<string, void(*)()>> _options);
 #pragma endregion
 
 #pragma region Functions
 	void Choice();
-	virtual void Display() = 0;
+	virtual void Display();
 #pragma endregion
 };
 

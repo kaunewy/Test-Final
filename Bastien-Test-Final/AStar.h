@@ -97,9 +97,7 @@ public:
 				}
 				for (Node *_node : _toDelete)
 				{
-					cout << _toDelete.size() << endl;
 					delete _node;
-					cout << "feur" << endl;
 				}
 				return _path;
 			}

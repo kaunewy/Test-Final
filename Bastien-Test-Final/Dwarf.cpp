@@ -93,6 +93,7 @@ string Dwarf::GetJobName(Job _job)
 		return "Chevalier";
 		break;
 	default:
+		return "Nothing";
 		break;
 	}
 }

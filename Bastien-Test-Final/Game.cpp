@@ -15,41 +15,73 @@ void Game::GameLoop()
 
 	_map.AddHouse(House(TH_BIG, Position(_map.GetLength() / 2, _map.GetWidth() / 2)));
 
+	_map.AddEnemy(new Giant(NONE, 150, 40,  Position(_map.GetLength() / 2 + 5, _map.GetWidth() / 2 + 5), "Pierre"));
+
 	_map.Init();
 	while (true)
 	{
-		MoveDwarf(_colony, _map);
+		MoveDwarfs(_colony, _map);
+		MoveEnemies(_map);
 		_map.Display();
 		for (auto _resource : _colony.GetResources())
 		{
 			cout << _colony.GetNameByResource(_resource.first) << " : " << _resource.second << endl;
 		}
 		_map.Move();
-		this_thread::sleep_for(chrono::milliseconds(8));
+		this_thread::sleep_for(chrono::milliseconds(16));
 		system("cls");
 	}
 }
 
-void Game::MoveDwarf(Colony& _colony, const Map& _map)
+void Game::MoveDwarfs(Colony& _colony, const Map& _map)
 {
 	for (auto _dwarf : _colony.GetDwarfs())
 	{
-		Position _goal = Position(_dwarf.second->GetPos());
-		int _minDist = INT_MAX;
-		for (u_int _i = 0; _i < _map.GetLength(); _i++)
+		if(_dwarf.second->GetMovement().empty())
 		{
-			for (u_int _j = 0; _j < _map.GetWidth(); _j++)
+			Position _goal = Position(_dwarf.second->GetPos());
+			int _minDist = INT_MAX;
+			for (u_int _i = 0; _i < _map.GetLength(); _i++)
 			{
-				int _dist = abs(int(_dwarf.second->GetPos().x) - int(_i)) + abs(int(_dwarf.second->GetPos().y) - int(_j));
-				if (_dist < _minDist && _map.GetMap()[_i][_j].first == _dwarf.second->GetDwarfJob())
+				for (u_int _j = 0; _j < _map.GetWidth(); _j++)
 				{
-					_minDist = _dist;
-					_goal = Position(_i, _j);
+					int _dist = abs(int(_dwarf.second->GetPos().x) - int(_i)) + abs(int(_dwarf.second->GetPos().y) - int(_j));
+					if (_dist < _minDist && _map.GetMap()[_i][_j].first == _dwarf.second->GetDwarfJob())
+					{
+						_minDist = _dist;
+						_goal = Position(_i, _j);
+					}
 				}
 			}
+			_dwarf.second->FindPath(_goal, _map.GetMap());
 		}
-		_dwarf.second->FindPath(_goal, _map.GetMap());
 		_dwarf.second->Move();
 		_colony.AddToResource(*_dwarf.second, _map.GetMap()[_dwarf.second->GetPos().x][_dwarf.second->GetPos().y].first);
+	}
+}
+
+void Game::MoveEnemies(Map& _map)
+{
+	for (auto _enemy : _map.GetEnemies())
+	{
+		if (_enemy->GetMovement().empty())
+		{
+			Position _goal = Position(_enemy->GetPos());
+			int _minDist = INT_MAX;
+			for (u_int _i = 0; _i < _map.GetLength(); _i++)
+			{
+				for (u_int _j = 0; _j < _map.GetWidth(); _j++)
+				{
+					int _dist = abs(int(_enemy->GetPos().x) - int(_i)) + abs(int(_enemy->GetPos().y) - int(_j));
+					if (_dist < _minDist && _map.GetMap()[_i][_j].second == OT_DWARF)
+					{
+						_minDist = _dist;
+						_goal = Position(_i, _j);
+					}
+				}
+			}
+			_enemy->FindPath(_goal, _map.GetMap());
+		}
+		_enemy->Move();
 	}
 }

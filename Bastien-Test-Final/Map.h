@@ -17,7 +17,7 @@ class Map
 	Colony* colony;
 	vector<House> houses;
 	vector<Menu> menu;
-	vector<Enemy> enemies;
+	vector<Enemy*> enemies;
 	 
 #pragma region Getters
 public:
@@ -37,6 +37,10 @@ public:
 	{
 		return length;
 	}
+	inline vector<Enemy*> GetEnemies() const
+	{
+		return enemies;
+	}
 #pragma endregion
 
 #pragma region Constructor
@@ -55,7 +59,7 @@ public:
 	void InitMenuDwarf(Dwarf& _dwarf);
 	void InitMenuHouse(House& _house);
 	void AddHouse(const House& _house);
-	void AddEnemy(const Enemy& _enemy);
+	void AddEnemy(Enemy* _enemy);
 #pragma endregion
 };
 

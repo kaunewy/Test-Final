@@ -34,6 +34,13 @@ void Map::Display()
 	u_int _sizeMapDisplayB = cursorPlayer.x > length - 10 ? 10 - ((cursorPlayer.x + 10) -length) : 0;
 	u_int _sizeMapDisplayL = cursorPlayer.y < 10 ? 10 - cursorPlayer.y : 0;
 	u_int _sizeMapDisplayR = cursorPlayer.y > width - 10 ? 10 - ((cursorPlayer.y + 10) - width) : 0;
+	for (u_int _i = 0; _i < length; _i++)
+	{
+		for (u_int _j = 0; _j < width; _j++)
+		{
+			map[_i][_j].second = OT_NONE;
+		}
+	}
 	for (u_int _i = cursorPlayer.x - (10 - _sizeMapDisplayT); _i < min<u_int>(length - 1,cursorPlayer.x + (10 - _sizeMapDisplayB)); _i++)
 	{
 		for (u_int _j = cursorPlayer.y - (10 - _sizeMapDisplayL); _j < min<u_int>(width - 1,cursorPlayer.y + (10 - _sizeMapDisplayR)); _j++)
@@ -50,6 +57,7 @@ void Map::Display()
 					cout << BG_RGB(140 + _addRGB, 52, 52) << " " << COLORRESET;
 					map[_i][_j].second = OT_DWARF;
 				}
+				continue;
 			}
 
 			for (const auto _house : houses)
@@ -58,6 +66,15 @@ void Map::Display()
 				{
 					cout << BG_RGB(150 + _addRGB, 0, 0) << " " << COLORRESET;
 					map[_i][_j].second = OT_BUILDING;
+				}
+				continue;
+			}
+			for (const auto _enemy : enemies)
+			{
+				if (_enemy->GetPos().x == _i && _enemy->GetPos().y == _j)
+				{
+					cout << BG_RGB(0 + _addRGB, 0 + _addRGB, 0 + _addRGB) << " " << COLORRESET;
+					map[_i][_j].second = map[_i][_j].second == OT_DWARF ? OT_DWARF : OT_ENEMY;
 				}
 				continue;
 			}
@@ -185,7 +202,7 @@ void Map::AddHouse(const House& _house)
 	houses.push_back(_house);
 }
 
-void Map::AddEnemy(const Enemy& _enemy)
+void Map::AddEnemy(Enemy* _enemy)
 {
-
+	enemies.push_back(_enemy);
 }

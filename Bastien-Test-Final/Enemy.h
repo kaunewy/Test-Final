@@ -28,6 +28,10 @@ public:
 	{
 		return pos;
 	}
+	inline vector<Position> GetMovement() const
+	{
+		return movement;
+	}
 #pragma endregion
 
 #pragma region Constructor

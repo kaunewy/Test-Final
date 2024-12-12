@@ -50,6 +50,10 @@ public:
 	{
 		satiaty = _satiaty;
 	}
+	inline vector<Position> GetMovement() const
+	{
+		return movement;
+	}
 #pragma endregion
 
 #pragma region Construtor

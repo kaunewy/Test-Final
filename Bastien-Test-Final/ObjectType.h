@@ -6,6 +6,7 @@ enum ObjectType
 	OT_DWARF,
 	OT_BUILDING,
 	OT_ENEMY,
+	OT_FIGHT,
 
 	OT_COUNT
 };

@@ -13,15 +13,19 @@ void Colony::AddToResource(Dwarf _dwarf, const TileType& _tile)
 		switch (_dwarf.GetDwarfJob())
 		{
 		case J_HUNTER:
-			for (auto _resource : resources)
+			for (auto& _resource : resources)
 			{
 				if (_resource.first == R_FOOD)
 				{
 					_resource.second = _resource.second + 10;
+					_isFound = true;
 					break;
 				}
 			};
-			resources.push_back(make_pair(R_FOOD, 10));
+			if (!_isFound)
+			{
+				resources.push_back(make_pair(R_FOOD, 10));
+			}
 			break;
 		case J_VILLAGER:
 			for (auto& _resource : resources)
@@ -39,26 +43,34 @@ void Colony::AddToResource(Dwarf _dwarf, const TileType& _tile)
 			}
 			break;
 		case J_LUMBERJACK:
-			for (auto _resource : resources)
+			for (auto& _resource : resources)
 			{
 				if (_resource.first == R_WOOD)
 				{
-					_resource.second += 10;
+					_resource.second = _resource.second + 10;
+					_isFound = true;
 					break;
 				}
 			};
-			resources.push_back(make_pair(R_WOOD, 10));
+			if (!_isFound)
+			{
+				resources.push_back(make_pair(R_WOOD, 10));
+			}
 			break;
 		case J_BLACK_SMITH:
-			for (auto _resource : resources)
+			for (auto& _resource : resources)
 			{
 				if (_resource.first == R_STONE)
 				{
-					_resource.second += 10;
+					_resource.second = _resource.second + 10;
+					_isFound = true;
 					break;
 				}
 			};
-			resources.push_back(make_pair(R_STONE, 10));
+			if (!_isFound)
+			{
+				resources.push_back(make_pair(R_STONE, 10));
+			}
 			break;
 		default:
 			break;
@@ -95,5 +107,17 @@ string Colony::GetNameByResource(const Resources& _resource) const
 	default:
 		return "Nothing";
 		break;
+	}
+}
+
+void Colony::Feed(Dwarf& _dwarf)
+{
+	for (auto resource : resources)
+	{
+		if (resource.first == R_FOOD && resource.second >=20)
+		{
+			_dwarf.Feed(20);
+			resource.second -= 20;
+		}
 	}
 }

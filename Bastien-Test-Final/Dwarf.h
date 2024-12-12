@@ -4,6 +4,8 @@
 #include <vector>
 #include "AStar.h"
 #include "TileType.h"
+#include "ObjectType.h"
+#include "Menu.h"
 
 
 enum Job
@@ -58,9 +60,11 @@ public:
 #pragma region Functions
 	bool Task(const TileType& _tile);
 	void Move(); 
-	void FindPath(const Position& _goal, const vector<vector<TileType>>& _map);
+	void FindPath(const Position& _goal, const vector<vector<pair<TileType, ObjectType>>>& _map);
 	void Feed(const u_int& _quantityFood);
 	void AddTool(Tool _tool);
+	void ChangeJob();
+	string GetJobName(Job _job);
 #pragma endregion
 
 };

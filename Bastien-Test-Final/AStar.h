@@ -31,16 +31,16 @@ struct Node
 	}
 };
 
-template <typename Type>
+template <typename Type, typename SecondType>
 class AStar
 {
-	vector<vector<Type>> map;
+	vector<vector<pair<Type, SecondType>>> map;
 	Position start;
 	Position goal;
 	
 #pragma region Constructor
 public:
-	AStar(vector<vector<Type>> _map, Position _start, Position _goal)
+	AStar(vector<vector<pair<Type, SecondType>>> _map, Position _start, Position _goal)
 	{
 		map = _map;
 		start = _start;
@@ -59,7 +59,7 @@ public:
 		return abs(_x1 - _x2) + abs(_y1 - _y2);
 	}
 
-	bool IsValid(u_int _x, u_int _y, const vector<vector<Type>>& _map)
+	bool IsValid(u_int _x, u_int _y, const vector<vector<pair<Type, SecondType>>>& _map)
 	{
 		return _x >= 0 && _y >= 0 && _x < _map.size() && _y < _map[0].size();
 	}

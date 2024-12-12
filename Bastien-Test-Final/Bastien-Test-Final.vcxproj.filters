@@ -37,6 +37,12 @@
     <Filter Include="Game">
       <UniqueIdentifier>{90fcf754-9583-4988-9093-8d7fe00dda54}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Building">
+      <UniqueIdentifier>{94fac2b7-f1be-4bc9-ba93-951064154c91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Save">
+      <UniqueIdentifier>{fbaa59b6-5e82-47a1-94bc-18214e6bd936}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -71,6 +77,9 @@
     </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="House.cpp">
+      <Filter>Building</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +127,12 @@
     </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectType.h">
+      <Filter>Fichiers de ressources</Filter>
+    </ClInclude>
+    <ClInclude Include="House.h">
+      <Filter>Building</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

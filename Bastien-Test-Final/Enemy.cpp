@@ -9,11 +9,11 @@ void Enemy::Move()
 	}
 }
 
-void Enemy::FindPath(const Position& _goal, const vector<vector<TileType>>& _map)
+void Enemy::FindPath(const Position& _goal, const vector<vector<pair<TileType, ObjectType>>>& _map)
 {
 	if (movement.empty())
 	{
-		AStar<TileType> _aStar(_map, pos, _goal);
+		AStar<TileType, ObjectType> _aStar(_map, pos, _goal);
 		movement = _aStar.AStarFunction();
 	}
 }

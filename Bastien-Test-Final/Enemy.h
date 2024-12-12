@@ -4,6 +4,7 @@
 #include <vector>
 #include "TileType.h"
 #include "AStar.h"
+#include "ObjectType.h"
 
 class Enemy
 {
@@ -45,7 +46,7 @@ public:
 public:
 	virtual bool DestroyBuilding() = 0;
 	void Move();
-	void FindPath(const Position& _goal, const vector<vector<TileType>>& _map);
+	void FindPath(const Position& _goal, const vector<vector<pair<TileType, ObjectType>>>& _map);
 #pragma endregion
 };
 

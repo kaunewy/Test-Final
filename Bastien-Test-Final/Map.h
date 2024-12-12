@@ -4,20 +4,24 @@
 #include "Random.h"
 #include "Colony.h"
 #include "Menu.h"
+#include "ObjectType.h"
+#include "House.h"
+#include "Enemy.h"
 
 class Map
 {
-	vector<vector<TileType>> map;
+	vector<vector<pair<TileType, ObjectType>>> map;
 	Position cursorPlayer;
 	u_int width;
 	u_int length;
 	Colony* colony;
+	vector<House> houses;
 	vector<Menu> menu;
-	Menu _currentMenu;
-
+	vector<Enemy> enemies;
+	 
 #pragma region Getters
 public:
-	inline vector<vector<TileType>> GetMap() const
+	inline vector<vector<pair<TileType, ObjectType>>> GetMap() const
 	{
 		return map;
 	}
@@ -48,6 +52,10 @@ public:
 	void Move();
 	bool IsValid(Position _currentPos, Position _direction) const;
 	TileType GetTile(Position _currentPos, Position _direction = Position(0,0));
+	void InitMenuDwarf(Dwarf& _dwarf);
+	void InitMenuHouse(House& _house);
+	void AddHouse(const House& _house);
+	void AddEnemy(const Enemy& _enemy);
 #pragma endregion
 };
 

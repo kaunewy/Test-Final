@@ -1,6 +1,8 @@
 #pragma once
 #include "Map.h"
 #include "AStar.h"
+#include <chrono>
+#include <thread>
 
 class Game
 {

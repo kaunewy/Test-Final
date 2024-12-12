@@ -42,11 +42,11 @@ void Dwarf::Move()
 	}
 }
 
-void Dwarf::FindPath(const Position& _goal, const vector<vector<TileType>>& _map)
+void Dwarf::FindPath(const Position& _goal, const vector<vector<pair<TileType, ObjectType>>>& _map)
 {
 	if(movement.empty())
 	{
-		AStar<TileType> _aStar(_map, posDwarf, _goal);
+		AStar<TileType, ObjectType> _aStar(_map, posDwarf, _goal);
 		movement = _aStar.AStarFunction();
 	}
 }
@@ -60,6 +60,41 @@ void Dwarf::Feed(const u_int& _quantityFood)
 void Dwarf::AddTool(Tool _tool)
 {
 	tools.push_back(_tool);
+}
+
+void Dwarf::ChangeJob()
+{
+	Menu _changeJob;
+	for (u_int _i = 0; _i < J_COUNT; _i++)
+	{
+		_changeJob.AddOption(GetJobName(static_cast<Job>(_i)), [this, _index = _i]{SetDwarfJob(static_cast<Job>(_index));});
+	}
+	_changeJob.Choice();
+	movement.clear();
+}
+
+string Dwarf::GetJobName(Job _job)
+{
+	switch (_job)
+	{
+	case J_LUMBERJACK:
+		return "Bucheron";
+		break;
+	case J_BLACK_SMITH:
+		return "Forgeron";
+		break;
+	case J_VILLAGER:
+		return "Villageois";
+		break;
+	case J_HUNTER:
+		return "Chasseur";
+		break;
+	case J_KNIGHT:
+		return "Chevalier";
+		break;
+	default:
+		break;
+	}
 }
 
 

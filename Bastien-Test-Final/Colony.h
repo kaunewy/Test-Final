@@ -38,6 +38,7 @@ public:
 	void CreateBuilding();
 	void CreateTool(Dwarf _dwarf, const string& _nameTool, const u_int& _damage, const CategoriesTools& _category);
 	string GetNameByResource(const Resources& _resource) const;
+	void Feed(Dwarf& _dwarf);
 #pragma endregion
 };
 

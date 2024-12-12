@@ -11,6 +11,9 @@ void Game::GameLoop()
 	Map _map(60, 40, _colony);
 
 	_colony.AddDwarf("salope", Dwarf(J_HUNTER,100, Position(22,22)));
+	_colony.GetDwarfs()[1].second->AddTool(Tool("zizi", 20, CT_SWORD));
+
+	_map.AddHouse(House(TH_BIG, Position(_map.GetLength() / 2, _map.GetWidth() / 2)));
 
 	_map.Init();
 	while (true)
@@ -22,6 +25,7 @@ void Game::GameLoop()
 			cout << _colony.GetNameByResource(_resource.first) << " : " << _resource.second << endl;
 		}
 		_map.Move();
+		this_thread::sleep_for(chrono::milliseconds(8));
 		system("cls");
 	}
 }
@@ -37,7 +41,7 @@ void Game::MoveDwarf(Colony& _colony, const Map& _map)
 			for (u_int _j = 0; _j < _map.GetWidth(); _j++)
 			{
 				int _dist = abs(int(_dwarf.second->GetPos().x) - int(_i)) + abs(int(_dwarf.second->GetPos().y) - int(_j));
-				if (_dist < _minDist && _map.GetMap()[_i][_j] == _dwarf.second->GetDwarfJob())
+				if (_dist < _minDist && _map.GetMap()[_i][_j].first == _dwarf.second->GetDwarfJob())
 				{
 					_minDist = _dist;
 					_goal = Position(_i, _j);
@@ -46,6 +50,6 @@ void Game::MoveDwarf(Colony& _colony, const Map& _map)
 		}
 		_dwarf.second->FindPath(_goal, _map.GetMap());
 		_dwarf.second->Move();
-		_colony.AddToResource(*_dwarf.second, _map.GetMap()[_dwarf.second->GetPos().x][_dwarf.second->GetPos().y]);
+		_colony.AddToResource(*_dwarf.second, _map.GetMap()[_dwarf.second->GetPos().x][_dwarf.second->GetPos().y].first);
 	}
 }
